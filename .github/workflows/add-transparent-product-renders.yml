@@ -1,0 +1,40 @@
+name: Add transparent product renders
+on:
+  push:
+    paths:
+      - '.github/workflows/add-transparent-product-renders.yml'
+permissions:
+  contents: write
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download and validate transparent PNG assets
+        run: |
+          mkdir -p site/assets/media
+          curl -L --fail --retry 3 'https://purepng.com/public/uploads/large/purepng.com-iphone-xiphone-xapplescreenback-21530617587toirg.png' -o site/assets/media/iphone-transparent-v1.png
+          curl -L --fail --retry 3 'https://purepng.com/public/uploads/large/purepng.com-macbookmacbooknotebookcomputersapple-inmacbook-familyapple-laptops-1701528360184gi0qt.png' -o site/assets/media/macbook-transparent-v1.png
+          curl -L --fail --retry 3 'https://purepng.com/public/uploads/large/apple-watch-pcq.png' -o site/assets/media/apple-watch-transparent-v1.png
+          python - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          for p in Path('site/assets/media').glob('*-transparent-v1.png'):
+              im=Image.open(p)
+              if im.mode not in ('RGBA','LA') and 'transparency' not in im.info:
+                  raise SystemExit(f'{p} has no alpha/transparency')
+              alpha=im.getchannel('A') if im.mode=='RGBA' else None
+              if alpha and alpha.getextrema()[0] == 255:
+                  raise SystemExit(f'{p} alpha channel is fully opaque')
+              if min(im.size) < 600:
+                  raise SystemExit(f'{p} too small: {im.size}')
+              print(p, im.mode, im.size, 'alpha', alpha.getextrema() if alpha else 'indexed transparency')
+          PY
+      - name: Commit assets
+        run: |
+          git config user.name 'Sunset Media Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add site/assets/media/*-transparent-v1.png
+          git diff --cached --quiet && exit 0
+          git commit -m 'Add transparent product renders for Apple categories'
+          git push
