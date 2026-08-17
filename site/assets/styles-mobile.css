@@ -1,3 +1,25 @@
+/* Sunset visual system — solid colors only */
+:root{--beam:#fa8105}
+body::before{display:none!important}
+.gradient-text{background:none!important;color:var(--orange)!important;-webkit-text-fill-color:var(--orange)!important}
+.nav-link:after,.beam-line,.progress-fill,.scroll-cue:after{background:var(--orange)!important;box-shadow:none!important}
+.halo{background:rgba(250,129,5,.14)!important}
+.phone{background:#151516!important}.phone-screen{background:#090909!important}.camera{background:#111112!important}.shine{display:none!important}
+.upgrade-shell,.trade-shell{background:#0d0d0e!important}.upgrade-shell:before{background:rgba(250,129,5,.08)!important}
+.choice.selected,.premium-answer:has(input:checked)>span{background:#17110c!important;box-shadow:none!important}
+.split-pane:first-child{background:#0b0b0c!important}.split-pane:last-child{background:#111112!important}.split-pane:after{background:rgba(0,0,0,.34)!important}
+.eco,.eco.featured{background:#0d0d0e!important}.eco:before{display:none!important}.device-orb{background:var(--orange)!important;opacity:.14!important}
+.store-visual{background:#101011!important}.tile-art,.tile:nth-child(2) .tile-art,.tile:nth-child(3) .tile-art,.tile:nth-child(4) .tile-art{background:#101011!important}
+.page-hero{background:#050505!important}.intent-card:before{background:rgba(250,129,5,.08)!important}.mini-phone{background:#111112!important;border-color:var(--orange)!important}
+.map-art{background:#101011!important}.hero-photo:after{background:rgba(5,5,5,.12)!important}.media-feature:after{background:rgba(5,5,5,.48)!important}.device-photo:after{background:rgba(5,5,5,.52)!important}.store-location-section:after{background:rgba(5,5,5,.78)!important}
+
+/* WhatsApp: recognizable icon, solid official action color */
+[data-wa].btn{background:#25d366!important;border-color:#25d366!important;color:#fff!important}
+[data-wa].btn:hover{background:#20bd5a!important;border-color:#20bd5a!important}
+[data-wa].btn::before{content:"";display:inline-block;width:20px;height:20px;flex:0 0 20px;background:url('/assets/whatsapp.svg') center/contain no-repeat}
+.header-cta[data-wa],.mobile-whatsapp[data-wa]{width:48px!important;min-width:48px!important;max-width:48px!important;padding:0!important;font-size:0!important;white-space:nowrap!important}
+.header-cta[data-wa]::before,.mobile-whatsapp[data-wa]::before{width:24px;height:24px;flex-basis:24px}
+
 /* Sunset Mobile UX — compact, touch-first and conversion-oriented */
 @media(max-width:767px){
   :root{--mobile-gutter:16px;--control-h:48px}
@@ -12,7 +34,6 @@
   h3{font-size:clamp(1.3rem,5.6vw,1.7rem);line-height:.98}
   .lede{font-size:.94rem;line-height:1.5;margin-top:13px;max-width:34rem}
 
-  /* Header: less height, clearer touch targets */
   .nav{height:58px}
   .brand{gap:8px}
   .brand img{width:32px;height:32px}
@@ -23,7 +44,6 @@
   .mobile-panel .close{top:9px;right:16px;width:40px;height:40px}
   .mobile-panel .btn{margin-top:18px}
 
-  /* Hero: first decision visible without excessive scrolling */
   .hero{padding:78px 0 30px;min-height:auto}
   .hero-grid{gap:16px}
   .hero-sub{font-size:.94rem;line-height:1.48;margin-top:13px}
@@ -31,26 +51,14 @@
   .hero .btn{font-size:.82rem;min-height:46px;padding-inline:8px}
   .hero-art,.hero-photo{min-height:250px!important;height:250px;margin-top:2px}
   .hero-photo{border-radius:4px!important}
-  .hero-photo .halo{inset:16% 10%;filter:blur(7px)}
+  .hero-photo .halo{inset:16% 10%;filter:none!important}
 
-  /* Uniform controls */
   .btn{min-height:48px;padding:0 14px;font-size:.9rem}
   .btns{gap:8px;margin-top:19px}
   main .btns{justify-content:center}
   .field input,.field select{min-height:50px}
 
-  /* Product discovery becomes swipeable instead of vertically huge */
-  .media-feature-grid,.editorial-media,.eco-grid,.model-grid,.intent-grid,.contact-grid{
-    display:flex!important;
-    overflow-x:auto;
-    overflow-y:hidden;
-    gap:10px!important;
-    scroll-snap-type:x mandatory;
-    scroll-padding-left:0;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
-    margin-top:22px
-  }
+  .media-feature-grid,.editorial-media,.eco-grid,.model-grid,.intent-grid,.contact-grid{display:flex!important;overflow-x:auto;overflow-y:hidden;gap:10px!important;scroll-snap-type:x mandatory;scroll-padding-left:0;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin-top:22px}
   .media-feature-grid::-webkit-scrollbar,.editorial-media::-webkit-scrollbar,.eco-grid::-webkit-scrollbar,.model-grid::-webkit-scrollbar,.intent-grid::-webkit-scrollbar,.contact-grid::-webkit-scrollbar{display:none}
   .media-feature{flex:0 0 82vw;min-height:285px!important;scroll-snap-align:start;border-radius:4px!important}
   .media-feature-copy{left:15px;right:15px;bottom:15px}
@@ -58,9 +66,7 @@
   .media-feature p{font-size:.82rem;line-height:1.42;margin:.35rem auto .65rem}
   .media-feature-copy .eyebrow{margin-bottom:5px}
   .media-feature-copy .btn{min-height:44px;width:auto;min-width:150px;padding-inline:12px}
-  .editorial-media figure,.editorial-media figure:first-child,.expanded-media figure,.expanded-media figure:first-child{
-    flex:0 0 74vw;min-height:215px!important;height:215px;scroll-snap-align:start;border-radius:4px!important
-  }
+  .editorial-media figure,.editorial-media figure:first-child,.expanded-media figure,.expanded-media figure:first-child{flex:0 0 74vw;min-height:215px!important;height:215px;scroll-snap-align:start;border-radius:4px!important}
   .expanded-media{display:flex!important}
   .expanded-media .new-media{min-height:215px!important}
   .eco{flex:0 0 76vw;min-height:185px!important;padding:18px;scroll-snap-align:start}
@@ -70,7 +76,6 @@
   .contact-card{flex:0 0 78vw;min-height:190px!important;padding:18px;scroll-snap-align:start}
   .model-art{height:92px;margin-bottom:14px}
 
-  /* Process blocks become denser */
   .steps3{margin-top:18px;gap:0}
   .process-step{padding:15px 0}
   .process-step h3{margin-top:10px}
@@ -80,7 +85,6 @@
   .priority strong{font-size:.98rem;margin-bottom:4px}
   .priority span{font-size:.78rem;line-height:1.35}
 
-  /* Location: immersive but compact */
   .store-location-section{min-height:400px!important;padding:58px 0!important}
   .store-location-content{max-width:32rem}
   .store-address{margin-top:16px;font-size:.88rem}
@@ -88,13 +92,11 @@
   .store-location-content .btn{font-size:.8rem;padding-inline:7px}
   .location-caption{margin-top:16px;font-size:.64rem;line-height:1.4;max-width:28rem}
 
-  /* FAQ and closing conversion */
   .faq{margin-top:20px}
   .faq summary{padding:15px 22px 15px 2px;font-size:.92rem;line-height:1.3}
   .faq .answer{padding:0 2px 15px;font-size:.84rem;line-height:1.45}
   .final-cta{padding:56px 0}
 
-  /* Footer uses space efficiently */
   .footer{padding:30px 0 calc(72px + env(safe-area-inset-bottom))}
   .footer-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:20px 14px!important}
   .footer-grid>div:first-child{grid-column:1/-1}
@@ -103,16 +105,13 @@
   .footer-links{gap:7px;font-size:.82rem}
   .footer-bottom{margin-top:22px;padding-top:14px;font-size:.72rem;gap:5px}
 
-  /* Persistent WhatsApp, but smaller and less intrusive */
-  .mobile-whatsapp{left:12px;right:12px;bottom:calc(9px + env(safe-area-inset-bottom));min-height:48px;font-size:.88rem;max-width:520px}
+  .mobile-whatsapp{display:flex!important;left:auto!important;right:12px!important;bottom:calc(12px + env(safe-area-inset-bottom))!important;width:50px!important;min-width:50px!important;max-width:50px!important;height:50px!important;min-height:50px!important;padding:0!important}
   body:has([data-trade-form]) .mobile-whatsapp{display:none!important}
 
-  /* Internal pages */
   .page-hero{padding:82px 0 32px;min-height:auto}
   .page-hero h1{font-size:clamp(2.45rem,11vw,3.25rem)}
   .page-product-visual{height:255px!important;margin-top:18px;border-radius:4px!important}
 
-  /* Trade / quiz: compact configurator rather than long form */
   .trade-hero{padding-bottom:18px;min-height:auto!important}
   .trade-hero .lede{font-size:.9rem;max-width:30rem}
   .trade-shell{margin-top:10px!important;padding:18px 13px!important;border-radius:2px!important;box-shadow:none!important}
