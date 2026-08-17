@@ -1,0 +1,1 @@
+Temporary repair marker. Product images are being replaced with validated WebP binaries.
