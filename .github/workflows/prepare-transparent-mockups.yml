@@ -1,0 +1,84 @@
+name: Prepare transparent product mockups
+on:
+  push:
+    paths:
+      - '.github/workflows/prepare-transparent-mockups.yml'
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y unzip imagemagick >/dev/null
+          python -m pip install --quiet psd-tools pillow
+      - name: Download licensed source mockups
+        run: |
+          mkdir -p /tmp/mockups /tmp/out
+          curl -L --fail --retry 3 'https://mockups-design.com/download/24306/' -o /tmp/mockups/iphone.zip
+          curl -L --fail --retry 3 'https://mockups-design.com/download/10236/' -o /tmp/mockups/macbook.zip
+          curl -L --fail --retry 3 'https://mockups-design.com/download/56576/' -o /tmp/mockups/watch.zip
+          file /tmp/mockups/*
+          for f in /tmp/mockups/*.zip; do d="/tmp/mockups/$(basename "$f" .zip)"; mkdir -p "$d"; unzip -q "$f" -d "$d"; done
+          find /tmp/mockups -type f | sed 's#^#/FILE #'
+      - name: Export transparent candidates from PSD layers
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from psd_tools import PSDImage
+          from PIL import Image
+          import re
+
+          roots={'iphone':Path('/tmp/mockups/iphone'),'macbook':Path('/tmp/mockups/macbook'),'watch':Path('/tmp/mockups/watch')}
+          out=Path('/tmp/out')
+          out.mkdir(exist_ok=True)
+
+          def walk(layer, depth=0):
+              yield layer, depth
+              if hasattr(layer,'__iter__'):
+                  for c in layer:
+                      yield from walk(c, depth+1)
+
+          for kind,root in roots.items():
+              psds=list(root.rglob('*.psd'))+list(root.rglob('*.PSD'))
+              print(kind, 'PSDS', len(psds))
+              for idx,p in enumerate(psds[:6]):
+                  try:
+                      psd=PSDImage.open(p)
+                      names=[]
+                      for layer,depth in walk(psd):
+                          name=(getattr(layer,'name','') or '').strip()
+                          names.append(('  '*depth)+name)
+                          low=name.lower()
+                          if any(x in low for x in ['background','background color','bg color','bg ']) or low in {'bg','background'}:
+                              try: layer.visible=False
+                              except: pass
+                      print('\n'.join(names[:120]))
+                      img=psd.composite(force=True)
+                      if img.mode!='RGBA': img=img.convert('RGBA')
+                      # Crop to visible alpha bounding box and add transparent breathing room.
+                      bbox=img.getbbox()
+                      if bbox:
+                          img=img.crop(bbox)
+                      max_side=1600
+                      scale=min(1,max_side/max(img.size))
+                      if scale<1:
+                          img=img.resize((round(img.width*scale),round(img.height*scale)),Image.LANCZOS)
+                      canvas=Image.new('RGBA',(img.width+80,img.height+80),(0,0,0,0))
+                      canvas.alpha_composite(img,(40,40))
+                      target=out/f'{kind}-{idx+1}.png'
+                      canvas.save(target,optimize=True)
+                      print('SAVED',target,canvas.size)
+                  except Exception as e:
+                      print('ERR',p,e)
+          PY
+          identify /tmp/out/*.png || true
+      - name: Upload candidates
+        uses: actions/upload-artifact@v4
+        with:
+          name: transparent-mockup-candidates
+          path: /tmp/out/*.png
+          if-no-files-found: error
