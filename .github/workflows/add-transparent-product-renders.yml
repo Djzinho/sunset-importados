@@ -12,6 +12,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Download and validate transparent PNG assets
         run: |
+          python -m pip install --quiet pillow
           mkdir -p site/assets/media
           curl -L --fail --retry 3 'https://purepng.com/public/uploads/large/purepng.com-iphone-xiphone-xapplescreenback-21530617587toirg.png' -o site/assets/media/iphone-transparent-v1.png
           curl -L --fail --retry 3 'https://purepng.com/public/uploads/large/purepng.com-macbookmacbooknotebookcomputersapple-inmacbook-familyapple-laptops-1701528360184gi0qt.png' -o site/assets/media/macbook-transparent-v1.png
