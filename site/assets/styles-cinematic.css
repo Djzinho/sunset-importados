@@ -2,7 +2,16 @@
 :root{--beam:#fa8105!important}
 body::before{display:none!important}
 .gradient-text{background:none!important;-webkit-background-clip:initial!important;background-clip:initial!important;color:var(--orange)!important}
-.halo,.hero-photo:after,.media-feature:after,.device-photo:after{display:none!important}
+.halo,.hero-photo:after,.media-feature:after,.device-photo:after,.device-orb,.shine{display:none!important}
+
+/* Remove legacy gradient treatments. The brand palette is solid. */
+.upgrade-shell,.choice.selected,.split-pane,.eco,.eco.featured,.store-visual,.progress-fill,.beam-line,.scroll-cue:after,.phone,.phone-screen,.camera,.lens{
+  background-image:none!important;
+}
+.upgrade-shell,.split-pane,.eco,.eco.featured,.store-visual{background-color:#0b0b0c!important}
+.upgrade-shell:before,.split-pane:after,.eco:before{display:none!important}
+.choice.selected{background:#15110c!important;border-color:var(--orange)!important}
+.progress-fill,.beam-line,.scroll-cue:after{background:#fa8105!important}
 
 /* Product images are objects, never photographic portraits/cards. */
 .hero-art.hero-photo{
