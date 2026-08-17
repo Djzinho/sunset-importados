@@ -1,4 +1,4 @@
-const CACHE='sunset-pwa-v1';
+const CACHE='sunset-pwa-v2';
 const CORE=[
   '/',
   '/offline.html',
@@ -6,6 +6,8 @@ const CORE=[
   '/assets/styles-1.css',
   '/assets/styles-mobile.css',
   '/assets/styles-mobile-pwa.css',
+  '/assets/styles-cinematic.css',
+  '/assets/styles-product-rail.css',
   '/assets/app.js',
   '/assets/pwa.js',
   '/assets/sunset-logo.webp',
