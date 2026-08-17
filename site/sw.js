@@ -1,4 +1,4 @@
-const CACHE='sunset-pwa-v2';
+const CACHE='sunset-pwa-v3';
 const CORE=[
   '/',
   '/offline.html',
@@ -10,6 +10,8 @@ const CORE=[
   '/assets/styles-product-rail.css',
   '/assets/app.js',
   '/assets/pwa.js',
+  '/assets/media/iphone-17-pro-max-user-v3.b64',
+  '/assets/media/apple-ecosystem-user-v3.b64',
   '/assets/sunset-logo.webp',
   '/assets/whatsapp.svg',
   '/assets/pwa-icon-192.png',
