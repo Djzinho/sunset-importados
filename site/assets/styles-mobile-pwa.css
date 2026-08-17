@@ -1,0 +1,99 @@
+/* Sunset mobile PWA — compact layout with safe gutters and no edge bleed */
+@media (max-width:767px){
+  :root{--app-gutter:16px;--app-max:420px}
+  html,body{width:100%;max-width:100%;overflow-x:hidden!important;background:#050505}
+  body{padding:0!important}
+  main,.site-header,.footer,.hero,.section,.page-hero,.store-location-section{max-width:100%!important;overflow-x:clip!important}
+
+  .container{
+    width:calc(100% - (var(--app-gutter)*2))!important;
+    max-width:var(--app-max)!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    padding-left:0!important;
+    padding-right:0!important;
+  }
+
+  .nav{width:100%!important;max-width:100%!important;padding:0!important}
+  .brand{min-width:0!important}.site-header .brand{margin-right:auto!important}
+  .menu-btn{margin-left:auto!important;flex:0 0 40px!important}
+
+  .hero{padding:74px 0 24px!important}
+  .hero-grid{width:100%!important;max-width:100%!important;display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:14px!important;justify-items:center!important}
+  .hero-copy{width:100%!important;max-width:100%!important;text-align:center!important;padding:0 2px!important}
+  .hero-copy .eyebrow{font-size:.59rem!important;line-height:1.35!important;letter-spacing:.15em!important;white-space:normal!important;max-width:300px!important;margin:0 auto 9px!important}
+  .hero-copy h1{font-size:clamp(2.25rem,10.6vw,3rem)!important;line-height:.92!important;max-width:330px!important;margin:0 auto!important;overflow-wrap:normal!important}
+  .hero-sub{font-size:.86rem!important;line-height:1.46!important;max-width:315px!important;margin:13px auto 0!important}
+  .hero .btns{display:grid!important;grid-template-columns:1fr!important;width:100%!important;max-width:310px!important;margin:16px auto 0!important;gap:7px!important;padding:0!important}
+  .hero .btn{width:100%!important;max-width:100%!important;min-width:0!important;min-height:46px!important;font-size:.82rem!important;padding:0 10px!important}
+  .hero-art,.hero-photo{width:100%!important;max-width:340px!important;height:218px!important;min-height:218px!important;margin:3px auto 0!important;border-radius:3px!important;overflow:hidden!important}
+  .hero-photo>img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important}
+
+  .section{padding:39px 0!important}.section.compact{padding:30px 0!important}
+  .section h2,.section h3,.page-hero h1{max-width:340px!important;margin-left:auto!important;margin-right:auto!important}
+  .section h2{font-size:clamp(1.85rem,8.4vw,2.45rem)!important;line-height:.95!important}
+  .lede{max-width:320px!important;font-size:.88rem!important;line-height:1.46!important;margin:11px auto 0!important}
+  .eyebrow{max-width:320px!important;margin-left:auto!important;margin-right:auto!important}
+
+  .btns{width:100%!important;max-width:310px!important;margin-left:auto!important;margin-right:auto!important;gap:7px!important}
+  .btn{max-width:100%!important;min-width:0!important;min-height:46px!important;font-size:.84rem!important;padding:0 12px!important;white-space:normal!important;line-height:1.15!important}
+
+  /* horizontal product rails stay inside the safe content width */
+  .media-feature-grid,.editorial-media,.expanded-media,.eco-grid,.model-grid,.intent-grid,.contact-grid{
+    width:100%!important;max-width:100%!important;margin-left:auto!important;margin-right:auto!important;
+    padding:0 2px 6px!important;scroll-padding-left:2px!important;scroll-padding-right:2px!important;
+    overflow-x:auto!important;overflow-y:hidden!important;overscroll-behavior-inline:contain!important
+  }
+  .media-feature{flex:0 0 86%!important;max-width:86%!important;min-height:260px!important}
+  .editorial-media figure,.expanded-media figure{flex:0 0 82%!important;max-width:82%!important;height:205px!important;min-height:205px!important}
+  .eco,.intent-card,.contact-card{flex:0 0 82%!important;max-width:82%!important;min-height:175px!important}
+  .model-card{flex:0 0 78%!important;max-width:78%!important;min-height:195px!important}
+  .media-feature-copy{left:14px!important;right:14px!important;bottom:14px!important}
+
+  /* location section: never touches bleed */
+  .store-location-section{min-height:auto!important;padding:46px 0!important}
+  .store-location-content{width:100%!important;max-width:100%!important;padding:0 2px!important;margin:0 auto!important;text-align:center!important}
+  .store-location-content h2{max-width:310px!important}
+  .store-location-content .lede{max-width:305px!important}
+  .store-address{display:block!important;max-width:305px!important;margin:14px auto 0!important;padding:0 4px!important;font-size:.79rem!important;line-height:1.45!important;overflow-wrap:anywhere!important;word-break:normal!important}
+  .store-location-content .btns{display:grid!important;grid-template-columns:1fr!important;max-width:295px!important;margin:16px auto 0!important;gap:7px!important}
+  .store-location-content .btn{width:100%!important;min-height:46px!important;font-size:.79rem!important}
+  .location-caption{max-width:300px!important;margin:14px auto 0!important;padding:0 4px!important;font-size:.59rem!important;line-height:1.42!important;overflow-wrap:anywhere!important}
+
+  /* product / internal page imagery */
+  .page-hero{padding:76px 0 26px!important}
+  .page-product-visual{width:100%!important;max-width:340px!important;height:220px!important;margin:16px auto 0!important}
+
+  /* trade configurator stays app-like and safely inset */
+  .trade-hero{padding:76px 0 14px!important}.trade-hero .lede{max-width:310px!important}
+  .trade-shell{width:100%!important;max-width:400px!important;margin:8px auto 0!important;padding:16px 12px!important;overflow:hidden!important}
+  .trade-progress{width:100%!important;max-width:100%!important;gap:4px!important;margin-bottom:17px!important}
+  .trade-progress-item{min-width:0!important;padding:6px 1px 0!important}.trade-progress-item span{font-size:.46rem!important}
+  .form-intro{max-width:300px!important;font-size:.8rem!important;margin:6px auto 14px!important}
+  .premium-fields,.condition-stack,.destination-wrap,.review-list{width:100%!important;max-width:100%!important;margin-left:auto!important;margin-right:auto!important}
+  .condition-block{padding:11px 0!important}.condition-title{font-size:.98rem!important;margin-bottom:6px!important}
+  .premium-options{width:100%!important;max-width:100%!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px!important}
+  .premium-answer{min-width:0!important}.premium-answer>span{width:100%!important;max-width:100%!important;min-height:52px!important;padding:8px 5px!important}
+  .premium-answer strong{font-size:.82rem!important;overflow-wrap:anywhere!important}.premium-answer small{display:none!important}
+  .field{min-width:0!important}.field input,.field select{width:100%!important;max-width:100%!important;min-width:0!important;height:48px!important;min-height:48px!important;font-size:.86rem!important}
+  .trade-shell .step-actions{width:100%!important;max-width:100%!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px!important;margin-top:16px!important}
+  .trade-shell .step-actions .btn{width:100%!important;max-width:100%!important;min-width:0!important;padding:0 6px!important;font-size:.8rem!important}
+  .single-action{grid-template-columns:1fr!important}.single-action .btn{max-width:280px!important;margin:auto!important}
+  .review-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:8px!important;padding:7px 0!important;font-size:.78rem!important}
+  .review-row strong{min-width:0!important;overflow-wrap:anywhere!important;font-size:.84rem!important}
+
+  .faq{max-width:340px!important;margin:18px auto 0!important}.faq summary{font-size:.87rem!important;padding:13px 22px 13px 2px!important}.faq .answer{font-size:.79rem!important}
+  .final-cta{padding:46px 0!important}
+
+  .footer{padding:27px 0 calc(68px + env(safe-area-inset-bottom))!important}.footer-grid{max-width:340px!important;margin:auto!important}.footer p{max-width:290px!important}
+  .mobile-whatsapp{right:max(12px,env(safe-area-inset-right))!important;bottom:calc(11px + env(safe-area-inset-bottom))!important}
+  .pwa-install{width:100%!important;max-width:310px!important;margin:14px auto 0!important}
+}
+
+@media (max-width:374px){
+  :root{--app-gutter:14px}
+  .hero-copy h1{font-size:2.18rem!important;max-width:300px!important}
+  .hero-sub{max-width:292px!important}
+  .hero-art,.hero-photo{max-width:320px!important;height:205px!important;min-height:205px!important}
+  .trade-shell{padding-inline:10px!important}
+}
