@@ -1,0 +1,34 @@
+name: Apply Sunset mobile CSS
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-mobile-css.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Load mobile CSS last on every page
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          for p in Path('site').rglob('*.html'):
+              s=p.read_text()
+              link='<link rel="stylesheet" href="/assets/styles-mobile.css?v=20260817-1">'
+              if link not in s:
+                  s=s.replace('</head>',link+'</head>')
+                  p.write_text(s)
+          p=Path('site/assets/styles-1.css')
+          s=p.read_text().replace("@import url('/assets/styles-mobile.css?v=20260817-1');\n",'')
+          p.write_text(s)
+          PY
+      - name: Commit mobile cascade
+        run: |
+          git config user.name 'Sunset Mobile UX Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add site
+          git diff --cached --quiet && exit 0
+          git commit -m 'Load compact mobile UX after base styles'
+          git push
