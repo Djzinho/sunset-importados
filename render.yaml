@@ -5,8 +5,6 @@ services:
     buildCommand: echo "Sunset Importados - static site ready"
     staticPublishPath: ./site
     autoDeployTrigger: commit
-    domains:
-      - sunsetimportados.com.br
     headers:
       - path: /*
         name: X-Content-Type-Options
