@@ -1,0 +1,33 @@
+name: Patch Sunset location caption
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/patch-home-caption.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update location context disclosure
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('site/index.html')
+          s=p.read_text()
+          old='Imagem de contexto da Praça Hercílio Luz. A fachada da loja será usada somente quando tivermos uma foto pública validada da Sunset Importados.'
+          new='Imagem de contexto do centro de Porto União, licenciada via Wikimedia Commons (CC BY-SA 3.0). Não é uma fotografia da fachada da Sunset. A fachada será usada somente quando houver uma imagem da loja que possa ser validada e reutilizada.'
+          if old not in s:
+              raise SystemExit('caption target not found')
+          p.write_text(s.replace(old,new))
+          PY
+      - name: Commit caption
+        run: |
+          git config user.name 'Sunset Site Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add site/index.html
+          git diff --cached --quiet && exit 0
+          git commit -m 'Clarify licensed Porto Uniao location background'
+          git push
