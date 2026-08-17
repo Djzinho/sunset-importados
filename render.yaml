@@ -2,6 +2,7 @@ services:
   - type: web
     name: sunset-importados
     runtime: static
+    plan: free
     buildCommand: echo "Sunset Importados - static site ready"
     staticPublishPath: ./site
     autoDeployTrigger: commit
