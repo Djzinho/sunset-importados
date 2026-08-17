@@ -1,0 +1,39 @@
+name: Prepare cache-busted HTML
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/prepare-cache-bust.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Version static asset references
+        run: |
+          for f in site/index.html site/iphones/index.html site/dispositivos/index.html; do
+            sed -i 's#iphone-16-pro\.webp#iphone-16-pro-v2.webp#g' "$f"
+            sed -i 's#iphone-dark\.webp#iphone-dark-v2.webp#g' "$f"
+            sed -i 's#apple-watch\.webp#apple-watch-v2.webp#g' "$f"
+            sed -i 's#styles-1\.css#styles-1.css?v=20260817-2#g' "$f"
+            sed -i 's#styles-2a\.css#styles-2a.css?v=20260817-2#g' "$f"
+            sed -i 's#styles-2b\.css#styles-2b.css?v=20260817-2#g' "$f"
+            sed -i 's#styles-3\.css#styles-3.css?v=20260817-2#g' "$f"
+            sed -i 's#styles-4\.css#styles-4.css?v=20260817-2#g' "$f"
+            sed -i 's#styles-media\.css#styles-media.css?v=20260817-2#g' "$f"
+            sed -i 's#app\.js#app.js?v=20260817-2#g' "$f"
+          done
+      - name: Upload updated HTML
+        uses: actions/upload-artifact@v4
+        with:
+          name: cache-busted-html
+          path: |
+            site/index.html
+            site/iphones/index.html
+            site/dispositivos/index.html
+          retention-days: 1
