@@ -1,0 +1,52 @@
+name: Apply transparent product renders
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-transparent-product-renders.yml'
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace product imagery with transparent renders
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          replacements={
+            '/assets/media/iphone-mockup-ls-v1.jpg':'/assets/media/iphone-transparent-v1.png',
+            '/assets/media/apple-watch-v3.jpg':'/assets/media/apple-watch-transparent-v1.png',
+            '/assets/media/macbook-mockup-ls-v1.jpg':'/assets/media/macbook-transparent-v1.png',
+          }
+          text_repl={
+            'iPhone fotografado em ambiente escuro com iluminação de produto':'Render 3D de iPhone com fundo transparente',
+            'iPhone Pro em fotografia de produto':'Render 3D de iPhone com fundo transparente',
+            'iPhone em fotografia real com fundo escuro':'Render 3D de iPhone com fundo transparente',
+            'Detalhe de iPhone Pro':'Render 3D de iPhone com fundo transparente',
+            'iPhone em fotografia de produto com fundo escuro':'Render 3D de iPhone com fundo transparente',
+            'Apple Watch em fotografia editorial':'Render 3D de Apple Watch com fundo transparente',
+            'Apple Watch em fotografia real de produto':'Render 3D de Apple Watch com fundo transparente',
+            'MacBook e AirPods em fotografia editorial':'Render 3D de MacBook com fundo transparente',
+          }
+          for p in Path('site').rglob('*.html'):
+            s=p.read_text()
+            for a,b in replacements.items(): s=s.replace(a,b)
+            for a,b in text_repl.items(): s=s.replace(a,b)
+            s=s.replace('https://sunsetimportados.com.br/iphones/','https://sunset-importados.onrender.com/iphones/')
+            s=s.replace('https://sunsetimportados.com.br/assets/sunset-logo.webp','https://sunset-importados.onrender.com/assets/media/iphone-transparent-v1.png')
+            p.write_text(s)
+          media=Path('MEDIA_SOURCES.md')
+          s=media.read_text() if media.exists() else '# Media sources\n'
+          block='''\n\n## Transparent product renders\n- `site/assets/media/iphone-transparent-v1.png` — PurePNG iPhone X render/cutout, transparent PNG. Source: https://purepng.com/photo/28223/electronics-iphone-x — page states free for commercial use, no attribution required.\n- `site/assets/media/macbook-transparent-v1.png` — PurePNG MacBook render/cutout, transparent PNG. Source: https://purepng.com/photo/24735/electronics-macbook — page states free for commercial use, no attribution required.\n- `site/assets/media/apple-watch-transparent-v1.png` — PurePNG Apple Watch render/cutout, transparent PNG. Source: https://purepng.com/photo/29572/objects-apple-watch — page states free for commercial use, no attribution required.\n- These are isolated third-party product renders used as visual mockups; they do not represent current Sunset inventory.\n'''
+          if '## Transparent product renders' not in s:
+            media.write_text(s+block)
+          PY
+      - name: Commit page updates
+        run: |
+          git config user.name 'Sunset Media Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add site MEDIA_SOURCES.md
+          git diff --cached --quiet && exit 0
+          git commit -m 'Use transparent 3D product renders across site'
+          git push
