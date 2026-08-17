@@ -1,0 +1,5 @@
+SUNSET-20260817-1608
+Expected latest site state:
+- responsive desktop/mobile CSS active
+- image paths use -v2 filenames
+- cache-control disabled for development
