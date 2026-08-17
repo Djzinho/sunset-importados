@@ -1,0 +1,22 @@
+{
+  "name": "Sunset Importados",
+  "short_name": "Sunset",
+  "description": "iPhones novos, seminovos e possibilidades de troca com atendimento direto em Porto União.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#050505",
+  "theme_color": "#050505",
+  "categories": ["shopping", "business"],
+  "icons": [
+    {"src": "/assets/pwa-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "/assets/pwa-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "/assets/pwa-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ],
+  "shortcuts": [
+    {"name": "Ver iPhones", "short_name": "iPhones", "url": "/iphones/"},
+    {"name": "Trocar meu iPhone", "short_name": "Troca", "url": "/troque-seu-iphone/"},
+    {"name": "Falar com a Sunset", "short_name": "Contato", "url": "/contato/"}
+  ]
+}
