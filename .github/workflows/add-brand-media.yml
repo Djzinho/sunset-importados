@@ -1,0 +1,31 @@
+name: Add Sunset visual media
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/add-brand-media.yml'
+permissions:
+  contents: write
+jobs:
+  media:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download real licensed media
+        run: |
+          mkdir -p site/assets/media
+          curl -L --fail --retry 3 'https://images.unsplash.com/photo-1724251280780-2ea2838916e6?auto=format&fit=crop&w=1800&q=85&fm=jpg' -o site/assets/media/macbook-airpods-v1.jpg
+          curl -L --fail --retry 3 'https://images.unsplash.com/photo-1514474959185-1472d4c4e0d4?auto=format&fit=crop&w=1800&q=85&fm=jpg' -o site/assets/media/airpods-macbook-v1.jpg
+          curl -L --fail --retry 3 'https://turismo.portouniao.sc.gov.br/uploads/sites/158/2022/10/0445457001358437564-scaled.jpg' -o site/assets/media/praca-hercilio-luz-v1.jpg
+          file site/assets/media/*-v1.jpg
+          test $(stat -c%s site/assets/media/macbook-airpods-v1.jpg) -gt 50000
+          test $(stat -c%s site/assets/media/airpods-macbook-v1.jpg) -gt 50000
+          test $(stat -c%s site/assets/media/praca-hercilio-luz-v1.jpg) -gt 50000
+      - name: Commit media
+        run: |
+          git config user.name 'Sunset Media Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add site/assets/media/*-v1.jpg
+          git diff --cached --quiet && exit 0
+          git commit -m 'Add additional real licensed visual media'
+          git push
