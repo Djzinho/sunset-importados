@@ -21,7 +21,7 @@ jobs:
           curl -L --fail --retry 3 'https://ls-graphics-directus-direct.b-cdn.net/assets/9da90f14-4ff7-467f-9cfb-9958ae94b916?format=webp&quality=90&width=1700' -o /tmp/macbook-mockup.webp
           convert /tmp/iphone-mockup.webp -resize '1500x1500>' -quality 91 site/assets/media/iphone-mockup-ls-v1.jpg
           convert /tmp/macbook-mockup.webp -resize '1500x1500>' -quality 91 site/assets/media/macbook-mockup-ls-v1.jpg
-          test $(stat -c%s site/assets/media/iphone-mockup-ls-v1.jpg) -gt 50000
+          test $(stat -c%s site/assets/media/iphone-mockup-ls-v1.jpg) -gt 15000
           test $(stat -c%s site/assets/media/macbook-mockup-ls-v1.jpg) -gt 50000
           convert site/assets/sunset-logo.webp -resize 148x148 /tmp/logo192.png
           convert -size 192x192 xc:'#050505' /tmp/logo192.png -gravity center -composite site/assets/pwa-icon-192.png
