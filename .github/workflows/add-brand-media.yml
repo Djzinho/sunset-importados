@@ -16,7 +16,7 @@ jobs:
           mkdir -p site/assets/media
           curl -L --fail --retry 3 'https://images.unsplash.com/photo-1724251280780-2ea2838916e6?auto=format&fit=crop&w=1800&q=85&fm=jpg' -o site/assets/media/macbook-airpods-v1.jpg
           curl -L --fail --retry 3 'https://images.unsplash.com/photo-1514474959185-1472d4c4e0d4?auto=format&fit=crop&w=1800&q=85&fm=jpg' -o site/assets/media/airpods-macbook-v1.jpg
-          curl -L --fail --retry 3 'https://turismo.portouniao.sc.gov.br/uploads/sites/158/2022/10/0445457001358437564-scaled.jpg' -o site/assets/media/praca-hercilio-luz-v1.jpg
+          curl -L --fail --retry 3 'https://static5.hotellux.com.br/files/2012/12/hotel-lux-praca-hercilio-luz-porto-uniao.jpg' -o site/assets/media/praca-hercilio-luz-v1.jpg
           file site/assets/media/*-v1.jpg
           test $(stat -c%s site/assets/media/macbook-airpods-v1.jpg) -gt 50000
           test $(stat -c%s site/assets/media/airpods-macbook-v1.jpg) -gt 50000
