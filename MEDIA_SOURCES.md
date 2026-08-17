@@ -61,3 +61,9 @@ Este arquivo registra a origem das fotografias adicionadas ao site. Fotografias 
 7. Imagens novas devem ser otimizadas para web e armazenadas localmente no repositório sempre que possível.
 
 Referências de licença: Unsplash License e CC BY-SA 3.0 conforme a página de origem de cada arquivo.
+
+
+## Licensed 3D product mockups
+- `site/assets/media/iphone-mockup-ls-v1.jpg` — LS Graphics, Free iPhone 15 Pro Mockup. Source: https://www.ls.graphics/assets/free-iphone-15-pro-mockup — listed by the publisher as free for personal and commercial projects.
+- `site/assets/media/macbook-mockup-ls-v1.jpg` — LS Graphics, MacBook Air 2022 Mockup. Source: https://www.ls.graphics/assets/macbook-air-2022-mockup — listed by the publisher as free for personal and commercial projects.
+- These mockups are third-party design assets and are not presented as official Apple marketing artwork or as proof of Sunset inventory.
