@@ -73,7 +73,7 @@ Referências de licença: Unsplash License e CC BY-SA 3.0 conforme a página de 
 - `site/assets/media/apple-watch-transparent-v1.png` — PurePNG Apple Watch render/cutout, transparent PNG. Source: https://purepng.com/photo/29572/objects-apple-watch — page states free for commercial use, no attribution required.
 - These are isolated third-party product renders used as visual mockups; they do not represent current Sunset inventory.
 
-## Home product choice refresh
-- `site/assets/media/iphone-17-pro-max-transparent-v1.webp` — iPhone 17 Pro Max, front/back transparent product render sourced from CityPNG. Source page: https://www.citypng.com/photo/0c867363/orange-iphone-17-pro-max-in-front-and-back-view. CityPNG states personal and commercial use are allowed with attribution; attribution is included in the site footer.
-- `site/assets/media/ipad-transparent-v1.png` — transparent tablet/iPad-tagged PNG sourced from PurePNG. Source page: https://purepng.com/photo/7467/electronics-tablet. The source page states commercial use is allowed with no attribution required.
-- These two assets are used only as illustrative category/product mockups and do not represent current Sunset inventory.
+## Home — mockups fornecidos pelo usuário
+- `site/assets/media/iphone-17-pro-max-user-v1.webp` — mockup de iPhone 17 Pro Max fornecido diretamente pelo usuário nesta conversa; otimizado para WebP preservando transparência.
+- `site/assets/media/apple-ecosystem-user-v1.webp` — composição com iPad, Apple Watch e AirPods fornecida diretamente pelo usuário nesta conversa; otimizada para WebP preservando transparência.
+- Uso: trilho horizontal da Home. As imagens funcionam como links visuais para `/iphones/` e `/dispositivos/` e não representam estoque em tempo real.
