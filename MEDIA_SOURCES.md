@@ -67,3 +67,10 @@ Referências de licença: Unsplash License e CC BY-SA 3.0 conforme a página de 
 - `site/assets/media/iphone-mockup-ls-v1.jpg` — LS Graphics, Free iPhone 15 Pro Mockup. Source: https://www.ls.graphics/assets/free-iphone-15-pro-mockup — listed by the publisher as free for personal and commercial projects.
 - `site/assets/media/macbook-mockup-ls-v1.jpg` — LS Graphics, MacBook Air 2022 Mockup. Source: https://www.ls.graphics/assets/macbook-air-2022-mockup — listed by the publisher as free for personal and commercial projects.
 - These mockups are third-party design assets and are not presented as official Apple marketing artwork or as proof of Sunset inventory.
+
+
+## Transparent product renders
+- `site/assets/media/iphone-transparent-v1.png` — PurePNG iPhone X render/cutout, transparent PNG. Source: https://purepng.com/photo/28223/electronics-iphone-x — page states free for commercial use, no attribution required.
+- `site/assets/media/macbook-transparent-v1.png` — PurePNG MacBook render/cutout, transparent PNG. Source: https://purepng.com/photo/24735/electronics-macbook — page states free for commercial use, no attribution required.
+- `site/assets/media/apple-watch-transparent-v1.png` — PurePNG Apple Watch render/cutout, transparent PNG. Source: https://purepng.com/photo/29572/objects-apple-watch — page states free for commercial use, no attribution required.
+- These are isolated third-party product renders used as visual mockups; they do not represent current Sunset inventory.
