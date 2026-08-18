@@ -1,4 +1,12 @@
 (()=>{
+  const responsiveHref='/assets/styles-responsive-final.css?v=20260817-1';
+  if(!document.querySelector(`link[href^="/assets/styles-responsive-final.css"]`)){
+    const link=document.createElement('link');
+    link.rel='stylesheet';
+    link.href=responsiveHref;
+    document.head.appendChild(link);
+  }
+
   const productAssets={
     '/assets/media/iphone-17-pro-max-user-v1.webp':'/assets/media/iphone-17-pro-max-user-v3.b64',
     '/assets/media/apple-ecosystem-user-v1.webp':'/assets/media/apple-ecosystem-user-v3.b64'
@@ -8,7 +16,7 @@
     const images=[...document.querySelectorAll('img')];
     await Promise.all(images.map(async img=>{
       let pathname='';
-      try{ pathname=new URL(img.getAttribute('src')||'',location.href).pathname; }catch{return;}
+      try{pathname=new URL(img.getAttribute('src')||'',location.href).pathname;}catch{return;}
       const dataPath=productAssets[pathname];
       if(!dataPath) return;
       try{
@@ -24,15 +32,44 @@
     }));
   };
 
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',hydrateProductAssets,{once:true});
-  else hydrateProductAssets();
+  const initProductRail=()=>{
+    const rail=document.querySelector('.product-choice-grid');
+    const cards=rail?[...rail.querySelectorAll('.product-choice-card')]:[];
+    const dots=[...document.querySelectorAll('.product-swipe-dots span')];
+    if(!rail||cards.length<2||!dots.length) return;
+    let ticking=false;
+    const update=()=>{
+      ticking=false;
+      const center=rail.scrollLeft+(rail.clientWidth/2);
+      let best=0,bestDistance=Infinity;
+      cards.forEach((card,index)=>{
+        const cardCenter=card.offsetLeft+(card.offsetWidth/2);
+        const distance=Math.abs(cardCenter-center);
+        if(distance<bestDistance){bestDistance=distance;best=index;}
+      });
+      dots.forEach((dot,index)=>dot.classList.toggle('active',index===best));
+    };
+    rail.addEventListener('scroll',()=>{
+      if(ticking) return;
+      ticking=true;
+      requestAnimationFrame(update);
+    },{passive:true});
+    addEventListener('resize',update,{passive:true});
+    update();
+  };
+
+  const start=()=>{
+    hydrateProductAssets();
+    initProductRail();
+    createInstallButton();
+  };
 
   if('serviceWorker' in navigator){
     addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
   }
 
   let deferredPrompt=null;
-  const createInstallButton=()=>{
+  function createInstallButton(){
     if(document.querySelector('[data-install-pwa]')) return;
     const panel=document.querySelector('.mobile-panel');
     if(!panel) return;
@@ -51,9 +88,11 @@
       deferredPrompt=null;
       button.hidden=true;
     });
-  };
+  }
 
-  document.addEventListener('DOMContentLoaded',createInstallButton);
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start,{once:true});
+  else start();
+
   addEventListener('beforeinstallprompt',event=>{
     event.preventDefault();
     deferredPrompt=event;
